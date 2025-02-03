@@ -1,0 +1,180 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta de San Valentín</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ff7a7a, #ffcccb);
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        h1 {
+            color: #d80000;
+            font-size: 3rem;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+        }
+        button {
+            padding: 12px 25px;
+            margin: 15px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #ff5050;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: #ff3333;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        .container {
+            margin-top: 60px;
+        }
+        .carta {
+            display: none;
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            border: 2px solid #d80000;
+            max-width: 600px;
+            margin: 40px auto;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            color: #333;
+            font-size: 1.1rem;
+            transition: all 0.5s ease-in-out;
+        }
+        .niModo {
+            display: none;
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            border: 2px solid #d80000;
+            max-width: 600px;
+            margin: 40px auto;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            animation: explode 1s ease-out infinite;
+        }
+        @keyframes explode {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
+        .heart-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .card-text {
+            margin-top: 20px;
+            line-height: 1.6;
+            color: #555;
+        }
+        .center-image {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>¿Quieres ser mi San Valentín?</h1>
+    <div class="center-image">
+        <img src="snoopy.jpg" alt="Snoopy abrazando a Woodstock" width="300">
+    </div>
+    <div class="container">
+        <button onclick="yes()">Sí</button>
+        <button onclick="no()">No</button>
+    </div>
+
+    <!-- Carta de amor -->
+    <div class="carta" id="carta">
+        <h1>Mi Querida Niña</h1>
+        <p class="card-text">
+            Quiero aprovechar este momento para decirte cuánto te quiero. Desde el primer momento que te vi, supe que había algo especial en ti. 
+            Tus sonrisas, tu forma de ser y tu presencia iluminan mi vida. Te agradezco por ser quien eres y por darme la oportunidad de compartir este 
+            momento contigo. No importa lo que pase, lo único que quiero es que seas feliz, y si puedo estar a tu lado, será un regalo maravilloso.
+        </p>
+        <p class="card-text">
+            Gracias por ser parte de mi vida. Te quiero mucho, más de lo que las palabras pueden expresar.
+        </p>
+        <button onclick="backToStart()">Volver a la página principal</button>
+    </div>
+
+    <!-- Mensaje "Ni modo" -->
+    <div class="niModo" id="niModo">
+        <h1>Ni modo</h1>
+        <button onclick="retry()">Una oportunidad más</button>
+    </div>
+
+    <script>
+        function yes() {
+            // Muestra la carta de amor
+            document.querySelector('.carta').style.display = 'block';
+            // Oculta los botones de la propuesta
+            document.querySelector('.container').style.display = 'none';
+            // Oculta la imagen principal
+            document.querySelector('.center-image').style.display = 'none';
+
+            // Crea la explosión de corazones
+            for (let i = 0; i < 30; i++) {
+                createHeart();
+            }
+        }
+
+        function createHeart() {
+            let heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.textContent = '💖';
+            document.body.appendChild(heart);
+            let x = Math.random() * window.innerWidth;
+            let y = Math.random() * window.innerHeight;
+
+            heart.style.left = `${x}px`;
+            heart.style.top = `${y}px`;
+
+            // Anima el corazón
+            heart.style.animationDuration = `${Math.random() * 2 + 2}s`; // Duración aleatoria
+            setTimeout(() => {
+                heart.remove(); // Elimina el corazón después de la animación
+            }, 2000);
+        }
+
+        function no() {
+            // Muestra el mensaje "Ni modo" y el botón de oportunidad
+            document.querySelector('.niModo').style.display = 'block';
+            // Oculta los botones de la propuesta
+            document.querySelector('.container').style.display = 'none';
+            // Oculta la imagen principal
+            document.querySelector('.center-image').style.display = 'none';
+        }
+
+        function retry() {
+            // Recarga la página para volver a mostrar la pregunta original
+            location.reload();
+        }
+
+        function backToStart() {
+            // Recarga la página para volver a la propuesta inicial
+            location.reload();
+        }
+    </script>
+</body>
+</html>
